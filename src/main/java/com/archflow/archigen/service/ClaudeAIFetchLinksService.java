@@ -134,30 +134,65 @@ public class ClaudeAIFetchLinksService {
 
     private String buildPrompt(String topic, DiagramType type) {
         String typeDesc = type == DiagramType.HLD
-                ? "High Level Design (architecture, components, data flow)"
-                : "Low Level Design (detailed implementation, classes, algorithms)";
+                ? "High Level Design (HLD)"
+                : "Low Level Design (LLD)";
 
         return String.format("""
-                You are a system design expert. Find the top 10 most relevant and authoritative 
-                web links about "%s" for %s.
+                You are a system design expert. Find the top 10 most relevant and authoritative\s
+                       web links about "%s" for %s.
                 
-                Focus on:
-                - Official documentation (AWS, GCP, Azure, etc.)
-                - System design articles from tech blogs
-                - Educational resources (GeeksforGeeks, System Design Primer)
-                - GitHub repositories with good documentation
+                ✅ PRIORITIZE these sources (proven to work, static HTML):
+                        - microservices.io/patterns/* (TARGET: 7 URLs - has excellent, reliable content)
+                        - raw.githubusercontent.com/* (TARGET: 2-3 URLs - use RAW URLs only, NOT blob)
                 
-                Return ONLY valid JSON in this exact format (no markdown, no code blocks):
+                ✅ OPTIONAL sources (use sparingly, 0-1 URLs each):
+                        - martinfowler.com/articles/*
+                        - aws.amazon.com/architecture/*
                 
-                {
-                  "links": [
-                    {
-                      "title": "Example Title",
-                      "url": "https://example.com",
-                      "source": "Source Name"
-                    }
-                  ]
-                }
+                ❌ NEVER USE these sources:
+                        - github.com/*/blob/* (always convert to raw.githubusercontent.com)
+                        - geeksforgeeks.org (JavaScript-heavy, unreliable)
+                        - medium.com (paywall)
+                        - educative.io, udemy.com, coursera.org (paid)
+                        - redis.io/docs/*, mongodb.com/blog/* (JavaScript-rendered)
+                        - youtube.com (video, not text)
+                        - Site homepages or landing pages
+                
+                CRITICAL REQUIREMENTS:
+                        1. URLs must be REAL and VERIFIED - do not guess or make up URLs
+                
+                        2. For GitHub, ALWAYS use raw URLs:
+                           ❌ BAD:  https://github.com/user/repo/blob/master/file.md
+                           ✅ GOOD: https://raw.githubusercontent.com/user/repo/master/file.md
+                
+                        3. Target distribution:
+                           - 7 URLs from microservices.io (proven 100%% success rate)
+                           - 2 URLs from GitHub raw (specific markdown files)
+                           - 1 URL from martinfowler.com or aws.amazon.com
+                
+                        4. Microservices.io has many excellent patterns:
+                           - /patterns/data/event-sourcing.html
+                           - /patterns/data/saga.html
+                           - /patterns/data/cqrs.html
+                           - /patterns/apigateway.html
+                           - /patterns/data/database-per-service.html
+                           - /patterns/reliability/circuit-breaker.html
+                           - /patterns/data/api-composition.html
+                           - /patterns/decomposition/decompose-by-subdomain.html
+                
+                        5. NO fragment URLs (no #anchors)
+                
+                        6. Link to specific articles/pages, NOT homepages
+                
+                        7. If unsure if a URL exists, don't include it
+                
+                        Return ONLY valid JSON (no markdown, no wrapper):
+                        {
+                          "links": [
+                            {"title": "...", "url": "https://...", "source": "..."}
+                          ]
+                        }
+                
                 
                 CRITICAL: Return ONLY the raw JSON. No ```json wrapper, no explanations.
                 """, topic, typeDesc);
