@@ -44,7 +44,7 @@ public class ClaudeAIService {
                     .bodyValue(request)
                     .retrieve()
                     .bodyToMono(String.class)
-                    .timeout(Duration.ofSeconds(120))
+                    .timeout(Duration.ofSeconds(180))
                     .block();
 
             log.info("✅ Received response from Claude API");

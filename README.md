@@ -16,7 +16,7 @@ ArchFlow Backend is a Spring Boot 4 application that automatically generates hig
 - 🕷️ **Intelligent Web Scraping** - Parallel scraping with 90% success rate (Virtual Threads)
 - 📡 **Real-time Progress Streaming** - SSE support for live progress updates
 - 🎨 **React Flow Ready** - Auto-positioned, styled diagrams ready for frontend rendering
-- 📊 **Multiple Diagram Types** - Supports HLD, LLD, C4, and more
+- 📊 **Multiple Diagram Types** - HLD [support for LLD and more in progress]
 
 ---
 
