@@ -7,18 +7,17 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * Represents a component in the system design
- * <p>
- * Example: LoadBalancer, Database, Redis Cache
+ * Represents a single architectural component
  */
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class Component {
+    private String id;
     private String name;
-
     private ComponentType type;
-
     private String description;
+    private String technology;
+    private String layer;
 }

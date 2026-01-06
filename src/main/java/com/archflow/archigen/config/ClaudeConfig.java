@@ -19,5 +19,5 @@ public class ClaudeConfig {
 
     private String model = "claude-sonnet-4-5";
 
-    private Integer maxTokens = 1000;
+    private Integer maxTokens = 8192;
 }
