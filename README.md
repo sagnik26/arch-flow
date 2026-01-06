@@ -31,8 +31,8 @@ ArchFlow Backend is a Spring Boot 4 application that automatically generates hig
 ### Installation
 ```bash
 # Clone the repository
-git clone https://github.com/your-org/ArchFlow-backend.git
-cd ArchFlow-backend
+[git clone https://github.com/your-org/arch-flow.git](https://github.com/sagnik26/arch-flow.git) 
+cd arch-flow
 
 # Set environment variable
 export CLAUDE_API_KEY="your-anthropic-api-key"
@@ -286,7 +286,7 @@ import tools.jackson.databind.ObjectMapper;  // NOT com.fasterxml.jackson
 
 ## 🤝 Contributing
 
-We welcome contributions! Please see [CONTRIBUTING.md](CONTRIBUTING.md) for details.
+Contributions are always welcome!
 
 1. Fork the repository
 2. Create a feature branch (`git checkout -b feature/amazing-feature`)
@@ -296,13 +296,4 @@ We welcome contributions! Please see [CONTRIBUTING.md](CONTRIBUTING.md) for deta
 
 ---
 
-## 🙏 Acknowledgments
-
-- [Anthropic Claude AI](https://www.anthropic.com/) - AI-powered component extraction
-- [Spring Boot 4](https://spring.io/projects/spring-boot) - Application framework
-- [React Flow](https://reactflow.dev/) - Diagram visualization format
-- [Virtual Threads (JEP 444)](https://openjdk.org/jeps/444) - Scalable concurrency
-
----
-
-**Made with ❤️ by the ArchFlow Team**
+**Made with ❤️ by the Sagnik Ghosh**
